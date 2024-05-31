@@ -1,6 +1,6 @@
 {
     "General_extensionDescription": {
-        "message": "Назначить прокси Firefox контейнеру",
+        "message": "Назначьте прокси-сервер контейнеру",
         "description": "Описание расширения."
     },
     "ContainerList_defaultContainerName": {
@@ -8,7 +8,7 @@
         "description": "Имя контейнера по умолчанию"
     },
     "ContainerList_privateBrowsingContainerName": {
-        "message": "Приватный режим",
+        "message": "Приватный просмотр",
         "description": "Имя контейнера для приватного режима"
     },
     "OptionsPage_browserTabTitle": {
@@ -20,7 +20,7 @@
         "description": "Название элемента меню для назначения прокси Firefox контейнерам"
     },
     "OptionsNavigation_proxies": {
-        "message": "Прокси",
+        "message": "Прокси-серверы",
         "description": "Название элемента меню для списка конфигураций прокси"
     },
     "OptionsNavigation_support": {
@@ -28,7 +28,7 @@
         "description": "Название элемента меню для страницы помощи"
     },
     "ContainerList_proxyDisabled": {
-        "message": "Напрямую",
+        "message": "Непосредственно",
         "description": "Настройка контейнера чтобы тот не использовал прокси"
     },
     "ProxyList_edit": {
@@ -56,11 +56,11 @@
         "description": "Поле `Не проксировать локальные адреса` в форме редактирования настроек прокси сервера"
     },
     "ProxyForm_proxyDnsFieldLabel": {
-        "message": "Проксировать DNS запросы",
+        "message": "Прокси DNS запросы",
         "description": "Поле `Проксировать DNS запросы` в форме редактирования настроек прокси сервера"
     },
     "ProxyForm_incorrectServerError": {
-        "message": "Значение должно быть или IP адресом, или доменным именем",
+        "message": "Значение должно быть: IP адресом или доменным именем",
         "description": "Сообщение отображаемое при неверном вводе сервера"
     },
     "ProxyForm_portFieldLabel": {
