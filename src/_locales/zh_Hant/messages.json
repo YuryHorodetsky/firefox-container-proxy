@@ -1,6 +1,6 @@
 {
     "General_extensionDescription": {
-        "message": "為每個容器分配代理服務器",
+        "message": "為每個容器分配代理伺服器",
         "description": "Description of the extension."
     },
     "OptionsPage_browserTabTitle": {
