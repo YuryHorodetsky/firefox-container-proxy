@@ -71,7 +71,7 @@
         "description": "Save button in proxy form"
     },
     "ProxyForm_testProxySettingsLabel": {
-        "message": "Test",
+        "message": "Verifica impostazioni",
         "description": "Settings test button label in proxy form"
     },
     "ProxyForm_testProxySettingsConfirmationText": {
@@ -150,5 +150,13 @@
     "General_extensionDescription": {
         "message": "Assegna un proxy a un contenitore",
         "description": "Description of the extension."
+    },
+    "ContainerList_privateBrowsingContainerName": {
+        "message": "Navigazione privata",
+        "description": "Name of container for private browsing window"
+    },
+    "ProxyForm_proxyDnsFieldLabel": {
+        "message": "Richieste Proxy DNS",
+        "description": "`Proxy DNS requests` field in the proxy form"
     }
 }
