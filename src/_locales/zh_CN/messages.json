@@ -74,7 +74,7 @@
         "description": "Header of import proxies page"
     },
     "OptionsNavigation_support": {
-        "message": "支持我们",
+        "message": "支持",
         "description": "Navigation link title for support information page"
     },
     "ProxySettingsTestResult_error": {
