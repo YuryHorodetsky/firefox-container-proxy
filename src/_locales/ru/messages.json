@@ -12,7 +12,7 @@
         "description": "Имя контейнера для приватного режима"
     },
     "OptionsPage_browserTabTitle": {
-        "message": "Container Proxy - настройки расширения",
+        "message": "Настройки расширения контейнерного прокси",
         "description": "Заголовок страницы параметров"
     },
     "OptionsNavigation_assign": {
@@ -20,7 +20,7 @@
         "description": "Название элемента меню для назначения прокси Firefox контейнерам"
     },
     "OptionsNavigation_proxies": {
-        "message": "Прокси-серверы",
+        "message": "Прокси",
         "description": "Название элемента меню для списка конфигураций прокси"
     },
     "OptionsNavigation_support": {
