@@ -4,7 +4,7 @@
         "description": "Text displayed on Import button when no file is selected or the file is invalid"
     },
     "ProxySettingsTestResult_notConnectedToTheInternet": {
-        "message": "Virhe! Et todennäköisesti ole yhteydessä Internetiin.",
+        "message": "Virhe! ehkä et ole yhteydessä Internetiin.",
         "description": "Text displayed when both direct and proxied requests failed to succeed"
     },
     "ProxySettingsTestResult_error": {
@@ -58,5 +58,85 @@
     "OptionsPage_browserTabTitle": {
         "message": "Container Proxy -laajennuksen asetukset",
         "description": "Title of option page"
+    },
+    "ContainerList_defaultContainerName": {
+        "message": "Oletus"
+    },
+    "OptionsNavigation_assign": {
+        "message": "Määritä"
+    },
+    "ContainerList_proxyDisabled": {
+        "message": "Suoraan"
+    },
+    "ProxyForm_doNotProxyLocalFieldLabel": {
+        "message": "Älä käytä välityspalvelinta paikallisille osoitteille ('localhost', 127.0.0.1, ::1)"
+    },
+    "ProxyForm_testProxySettingsLabel": {
+        "message": "Testaa"
+    },
+    "ProxySettingsTestResult_directRequest": {
+        "message": "Suora pyyntö:"
+    },
+    "ProxyForm_proxyDnsFieldLabel": {
+        "message": "Välityspalvelimen DNS-pyynnöt"
+    },
+    "ProxySettingsTestResult_incorrectSettings": {
+        "message": "Virhe! Välityspalvelimeen ei voitu muodostaa yhteyttä. Todennäköisesti asetukset ovat väärin."
+    },
+    "ProxySettingsTestResult_proxiedRequest": {
+        "message": "Pyyntö välityspalvelimen kautta:"
+    },
+    "ImportPage_heading": {
+        "message": "Tuo välityspalvelimia"
+    },
+    "ImportPage_foxyProxyInputLabel": {
+        "message": "FoxyProxyn asetukset"
+    },
+    "ProxyForm_protocolFieldLabel": {
+        "message": "Protokolla"
+    },
+    "General_extensionDescription": {
+        "message": "Määritä välityspalvelin kontille"
+    },
+    "ProxyForm_incorrectServerError": {
+        "message": "Arvon tulee olla joko IP-osoite tai toimialueen nimi"
+    },
+    "ContainerList_privateBrowsingContainerName": {
+        "message": "Yksityinen selaus"
+    },
+    "ProxyForm_testProxySettingsConfirmationText": {
+        "message": "Asetusten testaamiseksi sinun on tehtävä pari pyyntöä $DUCKDUCKGO_NAME$:lle. Edetäänkö?",
+        "placeholders": {
+            "DUCKDUCKGO_NAME": {
+                "content": "DuckDuckGo"
+            }
+        }
+    },
+    "ProxySettingsTestResult_noDirectConnection": {
+        "message": "Asetukset ovat oikein, mutta näyttää siltä, että Internet-yhteyden muodostaminen ilman välityspalvelinta ei ole mahdollista."
+    },
+    "SupportPage_gitterInvite": {
+        "message": "Jos sinulla on kysyttävää, ongelmia tai haluat vain pikakeskustella, olet tervetullut $GITTER_NAME$-kanavallemme:",
+        "placeholders": {
+            "GITTER_NAME": {
+                "content": "Gitter"
+            }
+        }
+    },
+    "ProxyForm_duckduckgoAttribution": {
+        "message": "IP-tulokset $DUCKDUCKGO_NAME$:lta",
+        "placeholders": {
+            "DUCKDUCKGO_NAME": {
+                "content": "DuckDuckGo"
+            }
+        }
+    },
+    "ImportPage_importButtonDoImport": {
+        "message": "Tuo $NUMBER$ välityspalvelinta",
+        "placeholders": {
+            "NUMBER": {
+                "content": "$1"
+            }
+        }
     }
 }
