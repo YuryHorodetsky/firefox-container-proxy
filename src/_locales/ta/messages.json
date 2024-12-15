@@ -1,1 +1,127 @@
-{}
+{
+    "OptionsNavigation_support": {
+        "message": "உதவி"
+    },
+    "ContainerList_proxyDisabled": {
+        "message": "நேரடியாக"
+    },
+    "ProxyList_edit": {
+        "message": "தொகு"
+    },
+    "ProxyForm_titleFieldLabel": {
+        "message": "தலைப்பு (விரும்பினால்)"
+    },
+    "ProxyForm_serverFieldLabel": {
+        "message": "சேவையகம்"
+    },
+    "ProxyForm_proxyDnsFieldLabel": {
+        "message": "பதிலாள் டிஎன்எச் கோரிக்கைகள்"
+    },
+    "ProxyForm_incorrectServerError": {
+        "message": "மதிப்பு ஐபி முகவரி அல்லது டொமைன் பெயராக இருக்க வேண்டும்"
+    },
+    "ProxyForm_portFieldLabel": {
+        "message": "துறைமுகம்"
+    },
+    "ProxyForm_usernameFieldLabel": {
+        "message": "பயனர்பெயர்"
+    },
+    "ProxyForm_passwordFieldLabel": {
+        "message": "கடவுச்சொல்"
+    },
+    "ProxyForm_doNotProxyLocalFieldLabel": {
+        "message": "உள்ளக முகவரிகளை பதிலாள் செய்ய வேண்டாம் (லோக்கல் புரவலன், 127.0.0.1, :: 1)"
+    },
+    "ProxyForm_testProxySettingsConfirmationText": {
+        "message": "அமைப்புகளை சோதிக்க $ duckduckgo_name பெறுநர் க்கு இரண்டு கோரிக்கைகளைச் செய்ய வேண்டும். தொடரவா?",
+        "placeholders": {
+            "DUCKDUCKGO_NAME": {
+                "content": "DuckDuckGo"
+            }
+        }
+    },
+    "ProxyForm_testProxySettingsLabel": {
+        "message": "தேர்வு"
+    },
+    "ProxyForm_duckduckgoAttribution": {
+        "message": "Ip duckduckgo_name இருந்து இலிருந்து ip முடிவுகள்",
+        "placeholders": {
+            "DUCKDUCKGO_NAME": {
+                "content": "DuckDuckGo"
+            }
+        }
+    },
+    "ProxySettingsTestResult_settingsAreCorrect": {
+        "message": "அமைப்புகள் சரியானவை!"
+    },
+    "ProxySettingsTestResult_error": {
+        "message": "பிழை!"
+    },
+    "ProxySettingsTestResult_noDirectConnection": {
+        "message": "அமைப்புகள் சரியானவை, ஆனால் இது பதிலாள் இல்லாமல் இணையத்துடன் இணைவது சாத்தியமில்லை."
+    },
+    "ProxySettingsTestResult_notConnectedToTheInternet": {
+        "message": "பிழை! ஒருவேளை, நீங்கள் இணையத்துடன் இணைக்கப்படவில்லை."
+    },
+    "ProxySettingsTestResult_incorrectSettings": {
+        "message": "பிழை! ப்ராக்சியுடன் இணைக்க முடியவில்லை. அநேகமாக அமைப்புகள் தவறானவை."
+    },
+    "SupportPage_gitterInvite": {
+        "message": "உங்களிடம் ஏதேனும் கேள்விகள் இருந்தால், ஒரு சிக்கல் இருந்தால் அல்லது அரட்டையடிக்க விரும்பினால் எங்கள் சேனலில் $ gitter_name $:",
+        "placeholders": {
+            "GITTER_NAME": {
+                "content": "Gitter"
+            }
+        }
+    },
+    "ProxySettingsTestResult_proxiedRequest": {
+        "message": "ப்ராக்சிட் கோரிக்கை:"
+    },
+    "ImportPage_foxyProxyInputLabel": {
+        "message": "ஃபாக்சிபிராக்சி அமைப்புகள்"
+    },
+    "ImportPage_heading": {
+        "message": "இறக்குமதி ப்ராக்சிகள்"
+    },
+    "ImportPage_importButtonNoFileSelected": {
+        "message": "ஒரு கோப்பைத் தேர்ந்தெடுக்கவும்"
+    },
+    "ImportPage_importButtonDoImport": {
+        "message": "இறக்குமதி $ எண் $ ப்ராக்சிகள்",
+        "placeholders": {
+            "NUMBER": {
+                "content": "$1"
+            }
+        }
+    },
+    "General_extensionDescription": {
+        "message": "ஒரு கொள்கலனுக்கு ப்ராக்சியை ஒதுக்குங்கள்"
+    },
+    "ContainerList_defaultContainerName": {
+        "message": "இயல்புநிலை"
+    },
+    "ContainerList_privateBrowsingContainerName": {
+        "message": "தனியார் உலாவல்"
+    },
+    "OptionsPage_browserTabTitle": {
+        "message": "கொள்கலன் பதிலாள் நீட்டிப்பு அமைப்புகள்"
+    },
+    "OptionsNavigation_assign": {
+        "message": "ஒதுக்க"
+    },
+    "OptionsNavigation_proxies": {
+        "message": "ப்ராக்சிகள்"
+    },
+    "ProxyList_delete": {
+        "message": "நீக்கு"
+    },
+    "ProxyForm_protocolFieldLabel": {
+        "message": "நெறிமுறை"
+    },
+    "ProxyForm_save": {
+        "message": "சேமி"
+    },
+    "ProxySettingsTestResult_directRequest": {
+        "message": "நேரடி கோரிக்கை:"
+    }
+}
