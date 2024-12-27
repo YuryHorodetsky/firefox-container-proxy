@@ -89,7 +89,7 @@
         "description": "Text displayed when proxied request succeeded, but direct request failed"
     },
     "ProxySettingsTestResult_notConnectedToTheInternet": {
-        "message": "Erreur ! Vous n’êtes probablement pas connecté·e à Internet.",
+        "message": "Erreur ! Vous n’êtes peut-être pas connecté·e à Internet.",
         "description": "Text displayed when both direct and proxied requests failed to succeed"
     },
     "ProxySettingsTestResult_settingsAreCorrect": {
@@ -144,5 +144,8 @@
     "OptionsNavigation_support": {
         "message": "Assistance",
         "description": "Navigation link title for support information page"
+    },
+    "ContainerList_privateBrowsingContainerName": {
+        "message": "Navigation privée"
     }
 }
