@@ -1,29 +1,5 @@
 {
     "OptionsNavigation_assign": {
         "message": "Назначити"
-    },
-    "ProxyForm_incorrectServerError": {
-        "message": "Значення має бути: IP-адресою або доменним ім'ям"
-    },
-    "ProxyForm_usernameFieldLabel": {
-        "message": "Ім'я користувача"
-    },
-    "ProxySettingsTestResult_directRequest": {
-        "message": "Прямий запит:"
-    },
-    "ImportPage_heading": {
-        "message": "Імпорт проксі"
-    },
-    "ProxyList_edit": {
-        "message": "Редагування"
-    },
-    "ProxyForm_protocolFieldLabel": {
-        "message": "Протокол"
-    },
-    "ProxyForm_portFieldLabel": {
-        "message": "Порт"
-    },
-    "ProxyForm_testProxySettingsLabel": {
-        "message": "Тест"
     }
 }
