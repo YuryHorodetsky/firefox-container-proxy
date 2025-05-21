@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   test:
     docker:
-      - image: cimg/node:18.20.2 # оновлений образ з Node.js 18
+      - image: cimg/node:14.21.3 # оновлений образ з Node.js 14
       - image: vimagick/dante
         command: bash -c "eval 'useradd user && echo user:password | chpasswd && sockd -f /etc/dante/sockd.conf -p /tmp/sockd.pid'"
     working_directory: ~/repo
