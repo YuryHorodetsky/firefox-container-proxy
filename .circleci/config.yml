@@ -1,4 +1,30 @@
-version: 2
+version: 2.1
+
+jobs:
+  test:
+    docker:
+      - image: cimg/node:18.20.2 # оновлений образ з Node.js 18
+      - image: vimagick/dante
+        command: bash -c "eval 'useradd user && echo user:password | chpasswd && sockd -f /etc/dante/sockd.conf -p /tmp/sockd.pid'"
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "pnpm-lock.yaml" }}
+            - v1-dependencies-
+      - run: npm install --prefix=$HOME/.local --global pnpm
+      - run: pnpm install
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "pnpm-lock.yaml" }}
+
+      - run: pnpm run ci:test-unit
+      - run: pnpm run ci:test-func
+      - run: pnpm run ci:style-check
+      - run: pnpm run ci:lint
+
 workflows:
   version: 2
   commit:
@@ -14,30 +40,3 @@ workflows:
                 - master
     jobs:
       - test
-
-jobs:
-  test:
-    docker:
-      - image: circleci/node:12-browsers
-      - image: vimagick/dante
-        command: bash -c "eval 'useradd user && echo user:password | chpasswd && sockd -f /etc/dante/sockd.conf -p /tmp/sockd.pid'"
-    working_directory: ~/repo
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "pnpm-lock.yaml" }}
-            # fallback to using the latest cache if no exact match is found
-            - v1-dependencies-
-      - run: npm install --prefix=$HOME/.local --global pnpm
-      - run: pnpm install
-      - save_cache:
-          paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "pnpm-lock.yaml" }}
-
-      # run tests!
-      - run: pnpm run ci:test-unit
-      - run: pnpm run ci:test-func
-      - run: pnpm run ci:style-check
-      - run: pnpm run ci:lint
