@@ -127,74 +127,41 @@ class Helper extends PageObject {
    * @return {Promise<OptionsPageObject>}
    */
   async openOptionsPage () {
-    // Замість кліку по тулбару, напряму відкриваємо options page через moz-extension:// URL
-
-    // Спочатку знайдемо uuid розширення в переліку вкладок браузера
-    // Шукаємо вкладку, яка містить Container Proxy extension settings
     await this._driver.setContext(firefox.Context.CONTENT);
 
-    // Пробуємо знайти options page через всі відкриті вікна і вкладки
-    let optionsTabHandle = null;
-    let optionsTabTitle = 'Container Proxy extension settings';
-
-    // Додаємо опціональний обхід: якщо сторінки ще нема, відкриваємо її явно через about:addons
-    let handles = await this._driver.getAllWindowHandles();
+    // 1. Шукаємо серед усіх відкритих вкладок url, який починається з moz-extension://
+    const handles = await this._driver.getAllWindowHandles();
+    let optionsUrl = null;
 
     for (const handle of handles) {
       await this._driver.switchTo().window(handle);
       try {
-        const title = await this._driver.getTitle();
-        if (title === optionsTabTitle) {
-          optionsTabHandle = handle;
+        const url = await this._driver.getCurrentUrl();
+        if (url && url.startsWith('moz-extension://')) {
+          // Формуємо url сторінки options.html на основі знайденого uuid
+          const uuid = url.match(/^moz-extension:\/\/[^/]+/)[0];
+          optionsUrl = `${uuid}/options.html`;
           break;
         }
-      } catch (e) {
-        // просто ігноруємо
-      }
+      } catch (e) {}
     }
 
-    if (!optionsTabHandle) {
-      // Точно відкриваємо сторінку опцій напряму
-      // Знаходимо всі розширення у about:debugging, але для тесту пробуємо універсальний хак:
-      // Цей шлях підходить для багатьох сучасних WebExtension:
-      // !!! Якщо не спрацює, треба буде підставити свій реальний uuid (див. нижче)
-      await this._driver.get('about:addons');
-      // Затримка для ініціалізації
-      await new Promise(res => setTimeout(res, 2000));
-      // Тут треба дізнатися uuid або явно прописати URL опцій
-      // Припустимо, твій маніфест має "options_ui": { "page": "options.html" }
-      // Доведеться "вгадати" uuid (або отримати його з вкладок)
-      // Пробуємо знайти вкладку ще раз
-      handles = await this._driver.getAllWindowHandles();
-      for (const handle of handles) {
-        await this._driver.switchTo().window(handle);
-        try {
-          const url = await this._driver.getCurrentUrl();
-          if (url.includes('moz-extension://')) {
-            // Пробуємо напряму перейти на options.html
-            const optionsUrl = url.replace(/(moz-extension:\/\/[^\/]+)\/.*/, '$1/options.html');
-            await this._driver.get(optionsUrl);
-            // Затримка для завантаження
-            await new Promise(res => setTimeout(res, 2000));
-            const title = await this._driver.getTitle();
-            if (title === optionsTabTitle) {
-              optionsTabHandle = handle;
-              break;
-            }
-          }
-        } catch (e) {}
-      }
+    // 2. Якщо не вдалося знайти uuid — пробуємо встановити розширення ще раз або кидаємо помилку
+    if (!optionsUrl) {
+      throw new Error('Не вдалося знайти uuid розширення. Перевірте, що розширення встановлюється!');
     }
 
-    if (!optionsTabHandle) {
-      // Як крайній випадок: повідомлення про помилку
-      throw new Error('Не вдалося знайти або відкрити сторінку налаштувань Container Proxy extension');
+    // 3. Відкриваємо options.html напряму
+    await this._driver.get(optionsUrl);
+    // Додаємо затримку для завантаження сторінки
+    await new Promise(res => setTimeout(res, 2000));
+
+    // Перевіряємо, чи справді це потрібна сторінка
+    const title = await this._driver.getTitle();
+    if (title !== 'Container Proxy extension settings') {
+      throw new Error('Options page відкрилася, але заголовок не співпав.');
     }
 
-    // Переключаємось на вкладку з налаштуваннями
-    await this._driver.switchTo().window(optionsTabHandle);
-
-    // Тепер можна повертати PageObject
     return this.createPageObject(OptionsPageObject);
   }
 
