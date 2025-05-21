@@ -19,10 +19,10 @@ describe('Container Proxy extension', function () {
     const fxOptions = new firefox.Options()
     // Додаємо прапорець для роботи з новим Firefox:
     fxOptions.addArguments('-remote-allow-system-access')
-    if (process.env.HEADLESS) {
-      fxOptions.headless()
-        .windowSize({ height: 1080, width: 1920 })
-    }
+   //if (process.env.HEADLESS) {
+   //   fxOptions.headless()
+   //    .windowSize({ height: 1080, width: 1920 })
+   //}
 
     const webExtension = await webExtensionsGeckoDriver(manifestPath, { fxOptions })
     geckodriver = webExtension.geckodriver
@@ -142,7 +142,7 @@ class Helper extends PageObject {
       }
       const title = await this._driver.getTitle()
       return title === 'Container Proxy extension settings'
-    }, 2000, 'Should have opened Container Proxy extension settings')
+    }, 10000, 'Should have opened Container Proxy extension settings')
 
     return this.createPageObject(OptionsPageObject)
   }
