@@ -17,6 +17,8 @@ describe('Container Proxy extension', function () {
 
   before(async () => {
     const fxOptions = new firefox.Options()
+    // Додаємо прапорець для роботи з новим Firefox:
+    fxOptions.addArguments('-remote-allow-system-access')
     if (process.env.HEADLESS) {
       fxOptions.headless()
         .windowSize({ height: 1080, width: 1920 })
