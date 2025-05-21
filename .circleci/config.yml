@@ -20,14 +20,14 @@ jobs:
 
       # Виправлення джерел Debian Stretch (архів)
       - run:
-          name: Redirect APT sources to archive.debian.org
-          command: |
-            sudo bash -c 'cat > /etc/apt/sources.list <<EOF
-deb http://archive.debian.org/debian stretch main contrib non-free
-deb http://archive.debian.org/debian-security stretch/updates main contrib non-free
-EOF'
-            sudo sed -i 's|http://security|http://archive|g' /etc/apt/sources.list
-            sudo apt -o Acquire::Check-Valid-Until=false update
+      name: Redirect APT sources to archive.debian.org
+      command: |
+        sudo bash -c "cat > /etc/apt/sources.list <<EOF
+        deb http://archive.debian.org/debian stretch main contrib non-free
+        deb http://archive.debian.org/debian-security stretch/updates main contrib non-free
+        EOF"
+      sudo sed -i 's|http://security|http://archive|g' /etc/apt/sources.list
+      sudo apt -o Acquire::Check-Valid-Until=false update
 
       # Встановлення Firefox (актуальної версії для тестів)
       - run: sudo apt install -y firefox-esr
