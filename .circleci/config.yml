@@ -27,13 +27,13 @@ jobs:
             echo "deb http://archive.debian.org/debian-security stretch/updates main contrib non-free" | sudo tee -a /etc/apt/sources.list
             sudo apt -o Acquire::Check-Valid-Until=false update
 
-      # Видалення старого Firefox та встановлення найновішого з Mozilla
+      # Видалення старого Firefox та встановлення найновішого (через xz-архів)
       - run:
           name: Install latest Firefox (manual)
           command: |
             sudo apt remove -y firefox-esr firefox || true
-            wget -O /tmp/firefox.tar.bz2 "https://download.mozilla.org/?product=firefox-latest&os=linux64&lang=en-US"
-            sudo tar -xjf /tmp/firefox.tar.bz2 -C /opt/
+            wget -O /tmp/firefox.tar.xz "https://download.mozilla.org/?product=firefox-latest&os=linux64&lang=en-US"
+            sudo tar -xJf /tmp/firefox.tar.xz -C /opt/
             sudo ln -fs /opt/firefox/firefox /usr/bin/firefox
             firefox --version
 
