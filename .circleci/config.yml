@@ -18,7 +18,7 @@ jobs:
       # Встановлення pnpm, сумісного з Node 14
       - run: npm install --prefix=$HOME/.local --global pnpm@6.32.20
 
-      # Виправлення джерел Debian Stretch (видалення старих .list)
+      # Видалення всіх зайвих APT-джерел, підключення лише архівних
       - run:
           name: Redirect APT sources to archive.debian.org
           command: |
@@ -27,8 +27,15 @@ jobs:
             echo "deb http://archive.debian.org/debian-security stretch/updates main contrib non-free" | sudo tee -a /etc/apt/sources.list
             sudo apt -o Acquire::Check-Valid-Until=false update
 
-      # Встановлення Firefox ESR
-      - run: sudo apt install -y firefox-esr
+      # Видалення старого Firefox та встановлення найновішого з Mozilla
+      - run:
+          name: Install latest Firefox (manual)
+          command: |
+            sudo apt remove -y firefox-esr firefox || true
+            wget -O /tmp/firefox.tar.bz2 "https://download.mozilla.org/?product=firefox-latest&os=linux64&lang=en-US"
+            sudo tar -xjf /tmp/firefox.tar.bz2 -C /opt/
+            sudo ln -fs /opt/firefox/firefox /usr/bin/firefox
+            firefox --version
 
       # Встановлення залежностей проєкту
       - run: pnpm install
