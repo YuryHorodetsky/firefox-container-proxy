@@ -20,19 +20,19 @@ jobs:
 
       # Виправлення джерел Debian Stretch (архів)
       - run:
-      name: Redirect APT sources to archive.debian.org
-      command: |
-        sudo bash -c "cat > /etc/apt/sources.list <<EOF
-        deb http://archive.debian.org/debian stretch main contrib non-free
-        deb http://archive.debian.org/debian-security stretch/updates main contrib non-free
-        EOF"
-      sudo sed -i 's|http://security|http://archive|g' /etc/apt/sources.list
-      sudo apt -o Acquire::Check-Valid-Until=false update
+          name: Redirect APT sources to archive.debian.org
+          command: |
+            sudo bash -c "cat > /etc/apt/sources.list <<EOF
+deb http://archive.debian.org/debian stretch main contrib non-free
+deb http://archive.debian.org/debian-security stretch/updates main contrib non-free
+EOF"
+            sudo sed -i 's|http://security|http://archive|g' /etc/apt/sources.list
+            sudo apt -o Acquire::Check-Valid-Until=false update
 
-      # Встановлення Firefox (актуальної версії для тестів)
+      # Встановлення Firefox
       - run: sudo apt install -y firefox-esr
 
-      # Встановлення залежностей
+      # Встановлення залежностей проєкту
       - run: pnpm install
 
       - save_cache:
@@ -40,7 +40,7 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "pnpm-lock.yaml" }}
 
-      # Запуск тестів
+      # Запуск усіх тестів
       - run: pnpm run ci:test-unit
       - run: pnpm run ci:test-func
       - run: pnpm run ci:style-check
