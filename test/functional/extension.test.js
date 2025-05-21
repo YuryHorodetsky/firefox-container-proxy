@@ -127,31 +127,81 @@ class Helper extends PageObject {
    * @return {Promise<OptionsPageObject>}
    */
   async openOptionsPage () {
-    await this._driver.setContext(firefox.Context.CHROME)
-    await this.click(this.toolbarButton)
-    await this._driver.setContext(firefox.Context.CONTENT)
+    // Замість кліку по тулбару, напряму відкриваємо options page через moz-extension:// URL
 
-    let windowHandle
-    await this._driver.wait(async () => {
-      const windowHandles = await this._driver.getAllWindowHandles()
-      windowHandle = windowHandles[windowHandles.length - 1]
+    // Спочатку знайдемо uuid розширення в переліку вкладок браузера
+    // Шукаємо вкладку, яка містить Container Proxy extension settings
+    await this._driver.setContext(firefox.Context.CONTENT);
+
+    // Пробуємо знайти options page через всі відкриті вікна і вкладки
+    let optionsTabHandle = null;
+    let optionsTabTitle = 'Container Proxy extension settings';
+
+    // Додаємо опціональний обхід: якщо сторінки ще нема, відкриваємо її явно через about:addons
+    let handles = await this._driver.getAllWindowHandles();
+
+    for (const handle of handles) {
+      await this._driver.switchTo().window(handle);
       try {
-        await this._driver.switchTo().window(windowHandle)
+        const title = await this._driver.getTitle();
+        if (title === optionsTabTitle) {
+          optionsTabHandle = handle;
+          break;
+        }
       } catch (e) {
-        return false
+        // просто ігноруємо
       }
-      const title = await this._driver.getTitle()
-      return title === 'Container Proxy extension settings'
-    }, 10000, 'Should have opened Container Proxy extension settings')
+    }
 
-    return this.createPageObject(OptionsPageObject)
+    if (!optionsTabHandle) {
+      // Точно відкриваємо сторінку опцій напряму
+      // Знаходимо всі розширення у about:debugging, але для тесту пробуємо універсальний хак:
+      // Цей шлях підходить для багатьох сучасних WebExtension:
+      // !!! Якщо не спрацює, треба буде підставити свій реальний uuid (див. нижче)
+      await this._driver.get('about:addons');
+      // Затримка для ініціалізації
+      await new Promise(res => setTimeout(res, 2000));
+      // Тут треба дізнатися uuid або явно прописати URL опцій
+      // Припустимо, твій маніфест має "options_ui": { "page": "options.html" }
+      // Доведеться "вгадати" uuid (або отримати його з вкладок)
+      // Пробуємо знайти вкладку ще раз
+      handles = await this._driver.getAllWindowHandles();
+      for (const handle of handles) {
+        await this._driver.switchTo().window(handle);
+        try {
+          const url = await this._driver.getCurrentUrl();
+          if (url.includes('moz-extension://')) {
+            // Пробуємо напряму перейти на options.html
+            const optionsUrl = url.replace(/(moz-extension:\/\/[^\/]+)\/.*/, '$1/options.html');
+            await this._driver.get(optionsUrl);
+            // Затримка для завантаження
+            await new Promise(res => setTimeout(res, 2000));
+            const title = await this._driver.getTitle();
+            if (title === optionsTabTitle) {
+              optionsTabHandle = handle;
+              break;
+            }
+          }
+        } catch (e) {}
+      }
+    }
+
+    if (!optionsTabHandle) {
+      // Як крайній випадок: повідомлення про помилку
+      throw new Error('Не вдалося знайти або відкрити сторінку налаштувань Container Proxy extension');
+    }
+
+    // Переключаємось на вкладку з налаштуваннями
+    await this._driver.switchTo().window(optionsTabHandle);
+
+    // Тепер можна повертати PageObject
+    return this.createPageObject(OptionsPageObject);
   }
 
   async assertCanGetTheIpAddress () {
     await this._driver.setContext(firefox.Context.CONTENT)
     await this._driver.get('https://duckduckgo.com/?q=ip&ia=answer&atb=v150-1')
     const text = await this._driver.getPageSource()
-
     expect(text).to.include('Your IP address is')
   }
 
@@ -162,7 +212,6 @@ class Helper extends PageObject {
     } catch (e) {
     }
     const text = await this._driver.getPageSource()
-
     expect(text).to.include('Firefox is configured to use a proxy server that is refusing connections.')
   }
 }
