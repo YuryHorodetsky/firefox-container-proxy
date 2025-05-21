@@ -15,8 +15,15 @@ jobs:
             - v1-dependencies-{{ checksum "pnpm-lock.yaml" }}
             - v1-dependencies-
 
-      # Встановлення pnpm, сумісного з Node.js 14
+      # Встановлення сумісної версії pnpm
       - run: npm install --prefix=$HOME/.local --global pnpm@6.32.20
+
+      # Оновлення Firefox до новішої версії
+      - run:
+          name: Update Firefox to latest
+          command: |
+            sudo apt update
+            sudo apt install -y firefox
 
       # Встановлення залежностей
       - run: pnpm install
@@ -26,7 +33,7 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "pnpm-lock.yaml" }}
 
-      # Тестування
+      # Запуск тестів
       - run: pnpm run ci:test-unit
       - run: pnpm run ci:test-func
       - run: pnpm run ci:style-check
