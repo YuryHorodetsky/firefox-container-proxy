@@ -18,10 +18,11 @@ jobs:
       # Встановлення pnpm, сумісного з Node 14
       - run: npm install --prefix=$HOME/.local --global pnpm@6.32.20
 
-      # Виправлення джерел Debian Stretch (без backports)
+      # Виправлення джерел Debian Stretch (видалення старих .list)
       - run:
           name: Redirect APT sources to archive.debian.org
           command: |
+            sudo rm -f /etc/apt/sources.list.d/*.list
             echo "deb http://archive.debian.org/debian stretch main contrib non-free" | sudo tee /etc/apt/sources.list
             echo "deb http://archive.debian.org/debian-security stretch/updates main contrib non-free" | sudo tee -a /etc/apt/sources.list
             sudo apt -o Acquire::Check-Valid-Until=false update
