@@ -19,12 +19,12 @@ jobs:
 
       # Виправлення джерел Debian Stretch через echo (на 100% сумісно з YAML)
       - run:
-          name: Redirect APT sources to archive.debian.org
-          command: |
-            echo "deb http://archive.debian.org/debian stretch main contrib non-free" | sudo tee /etc/apt/sources.list
-            echo "deb http://archive.debian.org/debian-security stretch/updates main contrib non-free" | sudo tee -a /etc/apt/sources.list
-            sudo sed -i 's|http://security|http://archive|g' /etc/apt/sources.list
-            sudo apt -o Acquire::Check-Valid-Until=false update
+      name: Redirect APT sources to archive.debian.org
+      command: |
+        echo "deb http://archive.debian.org/debian stretch main contrib non-free" | sudo tee /etc/apt/sources.list
+        echo "deb http://archive.debian.org/debian-security stretch/updates main contrib non-free" | sudo tee -a /etc/apt/sources.list
+        sudo apt -o Acquire::Check-Valid-Until=false update
+
 
       - run: sudo apt install -y firefox-esr
 
